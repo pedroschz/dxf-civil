@@ -1,0 +1,82 @@
+# Office CAD layer standard.
+#
+# CUSTOMIZE THIS FILE for your firm. The example below follows a simplified
+# version of the US National CAD Standard (NCS) AIA layer naming convention,
+# common in US civil engineering:
+#
+#   <Discipline>-<Major>-<Minor>[-<Status>]
+#
+#   Discipline: single letter (C = Civil, A = Architectural, S = Structural...)
+#   Major:      group (ROAD, STORM, SAN, WATR, TOPO, BLDG, PROP, ANNO...)
+#   Minor:      detail (CENT, EDGE, PIPE, STRC, TEXT, DIMS...)
+#   Status:     N (new) / E (existing) / D (demo) — optional
+#
+# In Mexico and other regions, conventions differ — adjust to match how your
+# office actually draws. The skill will check drawings against whatever
+# patterns you put here.
+
+# Required pattern every non-system layer must match.
+name_pattern: '^[CASMELPGT]-[A-Z0-9]+(-[A-Z0-9]+){0,2}$'
+
+# Layers that must exist on every project drawing.
+# Quote names that look like numbers — YAML parses bare 0 as an integer.
+required_layers:
+  - "0"
+  - "Defpoints"
+
+# Layers that should never appear (common offenders: trial layers,
+# orphaned imports, non-standard names).
+forbidden_layers:
+  - Layer1
+  - Layer2
+  - MyLayer
+
+# Per-pattern expectations. The first matching spec wins.
+# Color codes are AutoCAD Color Index (ACI): 1=red, 2=yellow, 3=green,
+# 4=cyan, 5=blue, 6=magenta, 7=white/black, 8=dark gray, etc.
+layer_specs:
+  - pattern: '^C-ROAD-CENT$'
+    color: 1            # red
+    linetype: CENTER
+
+  - pattern: '^C-ROAD-EDGE$'
+    color: 7
+    linetype: Continuous
+
+  - pattern: '^C-CURB(-.*)?$'
+    color: 3            # green
+    linetype: Continuous
+
+  - pattern: '^C-STORM-PIPE$'
+    color: 5            # blue
+    linetype: Continuous
+
+  - pattern: '^C-STORM-STRC$'
+    color: 5
+    linetype: Continuous
+
+  - pattern: '^C-SAN-PIPE$'
+    color: 6            # magenta
+    linetype: HIDDEN
+
+  - pattern: '^C-WATR-PIPE$'
+    color: 4            # cyan
+    linetype: Continuous
+
+  - pattern: '^C-TOPO-MAJR$'
+    color: 8            # dark gray
+    linetype: Continuous
+
+  - pattern: '^C-TOPO-MINR$'
+    color: 9
+    linetype: Continuous
+
+  - pattern: '^C-PROP-LINE$'
+    color: 2            # yellow
+    linetype: PHANTOM
+
+  - pattern: '^.+-TEXT$'
+    color: 7
+
+  - pattern: '^.+-DIMS$'
+    color: 7

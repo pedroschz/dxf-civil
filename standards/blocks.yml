@@ -1,0 +1,64 @@
+# Office standard block library.
+#
+# CUSTOMIZE for your firm. List the block names your office uses and the
+# attributes they should carry. The skill can warn about non-standard or
+# misspelled block names. (Add a check for this in validate.py when you
+# need it — it's not enabled by default.)
+
+# Format:
+#   <BLOCK_NAME>:
+#     description: short note
+#     attributes: [list of expected ATTDEF tags]
+#     category:    structures | annotations | symbols | titleblocks
+#     layer:       default insertion layer
+
+MH-STORM:
+  description: Storm manhole
+  attributes: [ID, RIM_ELEV, INV_IN, INV_OUT, DEPTH]
+  category: structures
+  layer: C-STORM-STRC
+
+MH-SAN:
+  description: Sanitary manhole
+  attributes: [ID, RIM_ELEV, INV_IN, INV_OUT, DEPTH]
+  category: structures
+  layer: C-SAN-STRC
+
+CB-INLET:
+  description: Catch basin / inlet
+  attributes: [ID, TYPE, RIM_ELEV, INV]
+  category: structures
+  layer: C-STORM-STRC
+
+VALVE-WATR:
+  description: Water valve
+  attributes: [ID, SIZE, TYPE]
+  category: structures
+  layer: C-WATR-STRC
+
+HYDRANT:
+  description: Fire hydrant
+  attributes: [ID]
+  category: structures
+  layer: C-WATR-STRC
+
+TITLEBLOCK-24x36:
+  description: Office standard title block 24x36
+  attributes:
+    - PROJECT_NAME
+    - PROJECT_NO
+    - SHEET_NO
+    - SHEET_TITLE
+    - DRAWN_BY
+    - CHECKED_BY
+    - DATE
+    - SCALE
+    - REVISION
+  category: titleblocks
+  layer: G-ANNO-TTLB
+
+NORTH-ARROW:
+  description: Standard north arrow
+  attributes: []
+  category: annotations
+  layer: G-ANNO-SYMB
